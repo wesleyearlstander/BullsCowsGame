@@ -6,6 +6,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
     Isograms = GetValidWords(HiddenWords);
+    PrintLine(TEXT("Hi welcome to Bull Cows Game!\nPress tab to enter terminal."));
     InitGame();
 }
 
@@ -25,11 +26,8 @@ void UBullCowCartridge::InitGame()
     HiddenWord = Isograms[FMath::RandRange(0, Isograms.Num()-1)];
     Lives = HiddenWord.Len();
     bGameOver = false;
-
-    PrintLine(TEXT("Hi welcome to Bull Cows Game!"));
     PrintLine(TEXT("Guess the %i letter word, you have %i lives"), HiddenWord.Len(), Lives);
     PrintLine(TEXT("Type in your guess.\nPress enter to continue..."));
-    PrintLine(TEXT("The hidden word is %s"), *HiddenWord); //debug
 }
 
 void UBullCowCartridge::ProcessGuess(const FString& Guess)
@@ -118,7 +116,7 @@ void UBullCowCartridge::EndGame(bool Won)
     }
     else {
         PrintLine(TEXT("You have run out of lives"));
-        PrintLine(TEXT("You lose, the hidden word is: "), *HiddenWord);
+        PrintLine(TEXT("You lose, the hidden word is: %s"), *HiddenWord);
     }
     PrintLine(TEXT("Press enter to play again."));
 }
